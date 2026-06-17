@@ -1,7 +1,7 @@
 import importlib
 import sys
-
 from typing import Dict, List
+
 
 def check_dependencies() -> Dict[str, str]:
 
@@ -31,7 +31,7 @@ def check_dependencies() -> Dict[str, str]:
             print(f"[MISSING] {package_name} is not installed.")
 
     if missing_packages:
-        print("\nCRITICAL ERROR: Missing required dependecies.")
+        print("\nCRITICAL ERROR: Missing required dependencies.")
         print("Please install them using pip or Poetry:")
         print("  [pip]  pip install -r requirements.txt")
         print("  [Poetry] poetry install")
@@ -39,13 +39,14 @@ def check_dependencies() -> Dict[str, str]:
 
     return installed_versions
 
+
 def analyze_matrix_data() -> None:
 
     print("\nAnalyzing Matrix data...")
 
-    import matplotlib.pyplot as plt
-    import numpy as np
-    import pandas as pd
+    import matplotlib.pyplot as plt #type: ignore
+    import numpy as np  #type: ignore
+    import pandas as pd #type: ignore
 
     print("Processing 1000 data points...")
 
@@ -55,39 +56,41 @@ def analyze_matrix_data() -> None:
 
     df = pd.DataFrame(
         raw_data,
-        columns=['Stream_A', 'Stream_B', 'Stream_C', 'Stream_D', 'Stream_E']
+        columns=["Stream_A", "Stream_B", "Stream_C", "Stream_D", "Stream_E"],
     )
 
-    df['Activity_Level'] = df.sum(axis=1)
+    df["Activity_Level"] = df.sum(axis=1)
 
     print("Generating visualization...")
 
     plt.figure(figsize=(10, 6))
 
     ax = plt.gca()
-    ax.set_facecolor('black')
-    plt.gcf().patch.set_facecolor('black')
+    ax.set_facecolor("black")
+    plt.gcf().patch.set_facecolor("black")
 
     plt.hist(
-        df['Activity_Level'],
+        df["Activity_Level"],
         bins=6,
-        color='#00FF41',
-        edgecolor='white',
-        alpha=0.8
+        color="#00FF41",
+        edgecolor="white",
+        alpha=0.8,
     )
 
-    plt.title('Matrix Stream Activity Distribution', color='#00FF41')
-    plt.xlabel('Activity Level (0-5)', color='#00FF41')
-    ax.tick_params(colors='white')
+    plt.title("Matrix Stream Activity Distribution", color="#00FF41")
+    plt.xlabel("Activity Level (0-5)", color="#00FF41")
+    ax.tick_params(colors="white")
 
-    output_file: str = 'matrix_analysis.png'
+    output_file: str = "matrix_analysis.png"
     plt.savefig(output_file)
     print("Analysis complete!")
     print(f"Results saved to: {output_file}")
 
+
 def main() -> None:
     check_dependencies()
     analyze_matrix_data()
+
 
 if __name__ == "__main__":
     main()

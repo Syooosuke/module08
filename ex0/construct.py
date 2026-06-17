@@ -1,15 +1,17 @@
-import sys
 import os
 import site
+import sys
+
 
 def is_virtual_env() -> bool:
     if sys.prefix != getattr(sys, "base_prefix", sys.prefix):
         return True
-    
+
     if os.environ.get("VIRTUAL_ENV"):
         return True
-    
+
     return False
+
 
 def print_outside_matrix() -> None:
     print("MARTRIX STATUS: You're still plugged in\n")
@@ -22,6 +24,7 @@ def print_outside_matrix() -> None:
     print("source matrix_env/bin/activate #On Unix")
     print("matrix_env\\Script\\activate # On Windows")
     print("Then run this program again.\n")
+
 
 def print_inside_construct() -> None:
     print("MATRIX STATUS: Welcome to the construct\n")
@@ -43,11 +46,13 @@ def print_inside_construct() -> None:
     else:
         print("Could not determine package installation path.")
 
+
 def main() -> None:
     if is_virtual_env():
         print_inside_construct()
     else:
         print_outside_matrix()
+
 
 if __name__ == "__main__":
     main()

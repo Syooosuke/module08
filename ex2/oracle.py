@@ -2,12 +2,15 @@ import os
 import sys
 
 try:
-    from dotenv import load_dotenv
+    from dotenv import load_dotenv #type: ignore
 
 except ImportError:
-    print("Error: python-dotenv is not installed. Please run 'poetry install'"
-    ".", file=sys.stderr)
+    print(
+        "Error: python-dotenv is not installed. Please run 'poetry install'.",
+        file=sys.stderr,
+    )
     sys.exit(1)
+
 
 def main() -> None:
     env_loaded: bool = load_dotenv()
@@ -21,7 +24,6 @@ def main() -> None:
 
     print("Configuration loaded:")
     print(f"Mode: {mode}")
-
 
     if db_url:
         if mode == "production":
@@ -49,16 +51,21 @@ def main() -> None:
     if env_loaded:
         print("[OK] .env file properly configured")
     else:
-        print("[WARNING] .env file not found. Running with missing "
-              "configurations.")
+        print(
+            "[WARNING] .env file not found. Running with missing "
+            "configurations."
+        )
 
     if mode == "production":
         print("[OK] Production overrides available")
     else:
-        print("[INFO] Running in development mode. No production overrides "
-              "active.")
+        print(
+            "[INFO] Running in development mode. No production overrides "
+            "active."
+        )
 
     print("\nThe Oracle sees all configureations.")
+
 
 if __name__ == "__main__":
     main()
